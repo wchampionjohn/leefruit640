@@ -20,4 +20,5 @@
 //= require vendor/countdowntime/countdowntime.js
 //= require vendor/lightbox2/js/lightbox.min.js
 //= require vendor/sweetalert/sweetalert.min.js
+//= require vendor/select2/select2.min.js
 //= require js/main.js
