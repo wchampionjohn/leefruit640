@@ -5,7 +5,13 @@ default: &default
 
 development:
   <<: *default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
   database: lee_mama
+  username: root
+  password:
+  host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

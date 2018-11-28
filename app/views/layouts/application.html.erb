@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    <title>李媽媽果社</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
@@ -20,11 +20,17 @@
 					<a href="https://www.facebook.com/leefruit640/" target="_blank" class="topbar-social-item fa fa-facebook"></a>
 				</div>
 				<div class="topbar-child2">
-						  <%= link_to("登入", "javascript:viod(0)", class: 'topbar-email') %>
-							<%#<span class="topbar-email">%>
-								<%#fashe@example.com%>
-							<%#</span>%>
+				  <% if  user_signed_in? %>
+          <%= link_to("Hi #{current_user.name}", edit_user_registration_path, class: 'topbar-email') %>
+					<div class="topbar-language rs1-select2">
+					<span class="topbar-email m-1">
+					  <%= link_to('登出', destroy_user_session_path, class: 'topbar-email', method: 'delete') %>
+					</span>
+					</div>
 
+				  <% else %>
+						  <%= link_to("登入", new_user_session_path, class: 'topbar-email') %>
+				  <% end %>
 				</div>
 			</div>
 
@@ -304,5 +310,7 @@
 	</header>
     <%= yield %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= devise_error_messages! if devise_controller? %>
+    <%= render 'shared/flash' %>
   </body>
 </html>

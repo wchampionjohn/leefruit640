@@ -1,0 +1,19 @@
+<script type="text/javascript" charset="utf-8">
+
+  <% unless flash[:alert].nil? %>
+  swal('Error', "<%= j flash[:alert] %>", "error");
+  <% flash.discard(:alert) %>
+  <% end %>
+
+  <% unless flash[:notice].nil? %>
+  swal('Notice', "<%= j flash[:notice] %>", "info");
+  <% flash.discard(:notice) %>
+  <% end %>
+
+  <% unless flash[:success].nil? %>
+  swal('Success', "<%= j flash[:success] %>", "success");
+  <% flash.discard(:Success) %>
+  <% end %>
+
+
+</script>

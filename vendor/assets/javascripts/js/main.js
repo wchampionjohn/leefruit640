@@ -181,5 +181,9 @@
         $('.video-mo-01').children('iframe')[0].src = srcOld;
         $('.video-mo-01').css('opacity','0');
     });
+		$(".selection-1").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
 
 })(jQuery);

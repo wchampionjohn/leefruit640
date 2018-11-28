@@ -1,0 +1,33 @@
+<section class="bgwhite p-t-66 p-b-60">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 p-b-30">
+      </div>
+      <div class="col-md-4 p-b-30">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => { class: 'leave-comment' }) do |f| %>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <%= f.email_field :email,
+          autocomplete: "email",
+          placeholder: "email",
+          class: "sizefull s-text7 p-l-22 p-r-22" %>
+        </div>
+
+        <div class="bo4 of-hidden size15 m-b-20">
+          <%= f.password_field :password,
+          placeholder: "密碼",
+          class: "sizefull s-text7 p-l-22 p-r-22" %>
+        </div>
+
+        <div class="of-hidden size15 m-b-20">
+          <!-- Button -->
+          <%= f.submit "登入", class: "flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" %>
+        </div>
+        <div class="of-hidden size15 m-b-20">
+          <%= link_to("註冊", new_user_registration_path, class: 'flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4') %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
