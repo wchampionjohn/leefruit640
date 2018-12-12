@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   get 'products/show'
 
   get 'index/index'
+  resource :cart, only:[:show, :destroy] do
+    #member do
+      #post "add", path:'add/:id'
+      #get "checkout"
+    #end
+  end
 
   root "index#index"
 

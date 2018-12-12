@@ -1,48 +1,32 @@
 <div class="container bgwhite p-t-35 p-b-80">
 		<div class="flex-w flex-sb">
 			<div class="w-size13 p-t-30 respon5">
-				<div class="wrap-slick3 flex-sb flex-w">
-					<div class="wrap-slick3-dots"></div>
+        <div class="wrap-slick3 flex-sb flex-w">
+          <div class="wrap-slick3-dots"></div>
 
-					<div class="slick3">
-						<div class="item-slick3" data-thumb="<%= image_path 'thumb-item-01.jpg' %>">
-							<div class="wrap-pic-w">
-                <%= image_tag 'thumb-item-01.jpg' %>
-							</div>
-						</div>
-
-						<div class="item-slick3" data-thumb="<%= image_path 'thumb-item-03.jpg' %>">
-							<div class="wrap-pic-w">
-                <%= image_tag 'thumb-item-03.jpg' %>
-							</div>
-						</div>
-
-						<div class="item-slick3" data-thumb="<%= image_path 'thumb-item-02.jpg' %>">
-							<div class="wrap-pic-w">
-                <%= image_tag 'thumb-item-02.jpg' %>
-							</div>
-						</div>
-					</div>
-				</div>
+          <div class="slick3">
+            <% @product.images.each do |image| %>
+            <div class="item-slick3" data-thumb="<%= image_path(image.file.url) %>">
+              <div class="wrap-pic-w">
+                <%= image_tag image.file.url %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
 			</div>
 
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13">
-          2018年 嘉東李媽媽青果社 帝王柑
+				  <%= @product.title %>
 				</h4>
 
 				<span class="m-text17">
-					$750
+				  $<%= @product.price %>
 				</span>
 
 				<p class="s-text8 p-t-10">
-          「帝王柑」的前身是「山東貢橘」，是以前帝王家御用美食。
-          帝王柑從大陸引進台灣栽種已數年之久。本青果社為了讓果實風味更符國人期許，參加產銷班進行農產改良，並在空氣、水源具足的豐沃土地上種植，得天獨厚的生長環境，栽種出果皮薄、汁多、口感細緻的「帝王柑」。
-
-          帝王柑果實玲瓏可愛，貌似柳丁的橘子，平均體積比茂谷柑還小一號，皮薄好剝，果肉比柳丁細嫩，剝開聞著有有淡淡柑橘、檸檬的果香味，所有的香氣都縮在這一顆小果實中。歡迎來嚐鮮！！
-
-          我們按訂單先後出貨，可以先下單排程，出貨前我們會通知。
-          按登記先後順序安排出貨～
+				  <%= @product.description %>
         </p>
 
 				<!--  -->
@@ -54,8 +38,9 @@
 
 						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
 							<select class="selection-2" name="size">
-								<option>禮盒分享7斤裝</option>
-								<option>團購分享20斤裝</option>
+							  <% @product.specs.each do |spec| %>
+                <option><%= spec.title %></option>
+							  <% end %>
 							</select>
 						</div>
 					</div>
@@ -94,27 +79,7 @@
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
             <p class="s-text8">
-              我們按訂單先後出貨，可以先下單排程，出貨前我們會通知。
-              按登記先後順序安排出貨～
-
-              1.禮盒分享7斤裝  (運費另計)
-              原價750元，優惠價600元/箱
-
-              2.團購分享20斤裝  (運費另計)
-              原價1,600元，優惠價1,200元/箱
-
-              A.禮盒分享運費：
-              1-2箱→100元
-              3-4箱→200元
-              以此類推
-
-              B.團購分享運費：
-              1箱→100元
-              2箱→200元
-              以此類推
-
-              歡迎個人、公司、團體訂購，提早來電詢問洽詢。
-              消費者如有特殊需求品項，也提供客製化服務唷。
+              <%= @product.description_2 %>
             </p>
 					</div>
 				</div>
