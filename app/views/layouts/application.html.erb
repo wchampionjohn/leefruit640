@@ -39,33 +39,7 @@
 				<a href="index.html" class="logo">
           <%= image_tag 'icons/logo.jpg', alt: "IMG-LOGO", height: "60", width:"60" %>
 				</a>
-
-				<!-- Menu -->
-				<div class="wrap_menu">
-					<nav class="menu">
-						<ul class="main_menu">
-							<li class="sale-noti">
-							  <%= link_to("首頁", root_path) %>
-							</li>
-							<li>
-							  <%= link_to("帝王柑", product_path(1)) %>
-							</li>
-							<li>
-							  <%= link_to("關於李媽媽青果社", 'javascript:void(0)') %>
-							</li>
-							<li>
-							  <%= link_to("訂購流程", 'javascript:void(0)') %>
-							</li>
-							<li>
-							  <%= link_to("部落格", 'javascript:void(0)') %>
-							</li>
-							<li>
-							  <%= link_to("聯絡我們", 'javascript:void(0)') %>
-							</li>
-						</ul>
-					</nav>
-				</div>
-
+				<%= render partial: 'shared/menu' %>
 				<!-- Header Icon -->
 				<div class="header-icons">
 					<a href="#" class="header-wrapicon1 dis-block">

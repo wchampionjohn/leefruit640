@@ -1,0 +1,25 @@
+<!-- Menu -->
+<div class="wrap_menu">
+  <nav class="menu">
+    <ul class="main_menu">
+      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == root_path %> >
+        <%= link_to("首頁", root_path) %>
+      </li>
+      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == product_path(1) %> >
+        <%= link_to("帝王柑", product_path(1)) %>
+      </li>
+      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == about_index_path %> >
+        <%= link_to("關於李媽媽青果社", about_index_path) %>
+      </li>
+      <li>
+        <%= link_to("訂購流程", 'javascript:void(0)') %>
+      </li>
+      <li>
+        <%= link_to("部落格", 'javascript:void(0)') %>
+      </li>
+      <li>
+        <%= link_to("聯絡我們", 'javascript:void(0)') %>
+      </li>
+    </ul>
+  </nav>
+</div>
