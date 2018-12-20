@@ -1,0 +1,43 @@
+	<!-- content page -->
+	<section class="bgwhite p-t-66 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 p-b-30">
+					<div class="p-r-20 p-r-0-lg">
+
+            <div class="col-md-6 p-b-30">
+            <iframe frameborder="0" height="450px" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com.tw/maps?f=q&amp;source=s_q&amp;hl=zh-TW&amp;geocode=&amp;q=%E6%96%97%E5%85%AD%E5%B8%82%E5%98%89%E6%9D%B1%E9%87%8C%E5%98%89%E6%9D%B1%E4%B8%AD%E8%B7%AF17%E8%99%9F&amp;aq=&amp;sll=23.687054,120.547829&amp;sspn=0.006426,0.009645&amp;brcurrent=3,0x346ec8582f40da55:0x8291872bee54f4c2,0,0x346eba2773c7f341:0x7ae4c47c03d12a95&amp;ie=UTF8&amp;hq=&amp;hnear=640%E9%9B%B2%E6%9E%97%E7%B8%A3%E6%96%97%E5%85%AD%E5%B8%82%E5%98%89%E6%9D%B1%E4%B8%AD%E8%B7%AF17%E8%99%9F&amp;ll=23.687054,120.547829&amp;spn=0.006386,0.009645&amp;t=m&amp;z=14&amp;output=embed" width="200%"></iframe>
+            </div>
+					</div>
+				</div>
+
+				<div class="col-md-6 p-b-30">
+				  <%= form_for @contract, class: 'leave-comment' do |f| %>
+						<h4 class="m-text26 p-b-36 p-t-15">
+							聯絡我們
+						</h4>
+
+						<div class="bo4 of-hidden size15 m-b-20">
+              <%= f.text_field :name,  class: 'sizefull s-text7 p-l-22 p-r-22', placeholder: '姓名 *' %>
+						</div>
+
+						<div class="bo4 of-hidden size15 m-b-20">
+              <%= f.text_field :phone_number,  class: 'sizefull s-text7 p-l-22 p-r-22', placeholder: '聯絡電話' %>
+						</div>
+
+						<div class="bo4 of-hidden size15 m-b-20">
+              <%= f.text_field :email,  class: 'sizefull s-text7 p-l-22 p-r-22', placeholder: 'Email' %>
+						</div>
+
+              <%= f.text_area :message,  class: 'dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20', placeholder: '訊息內容 *' %>
+
+						<div class="w-size25">
+							<!-- Button -->
+							<%= f.submit '發送', class: 'flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4' %>
+							</button>
+						</div>
+				  <% end %>
+				</div>
+			</div>
+		</div>
+	</section>

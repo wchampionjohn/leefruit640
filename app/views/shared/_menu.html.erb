@@ -11,14 +11,14 @@
       <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == about_index_path %> >
         <%= link_to("關於李媽媽青果社", about_index_path) %>
       </li>
-      <li>
-        <%= link_to("訂購流程", 'javascript:void(0)') %>
+      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == note_index_path %> >
+        <%= link_to("訂購流程", note_index_path) %>
       </li>
       <li>
         <%= link_to("部落格", 'javascript:void(0)') %>
       </li>
-      <li>
-        <%= link_to("聯絡我們", 'javascript:void(0)') %>
+      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == new_contract_path %> >
+        <%= link_to("聯絡我們", new_contract_path) %>
       </li>
     </ul>
   </nav>
