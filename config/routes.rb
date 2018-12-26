@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   root "index#index"
 
   resources :products
+  resources :articles
   resources :contracts, only:[:new, :create]
 
   get 'about/index'
