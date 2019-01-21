@@ -4,8 +4,7 @@ class ProductImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+   #storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -45,7 +44,7 @@ class ProductImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
    def filename
-     "#{secure_token(10)}.#{file.extension.downcase}" if original_filename.present?
+     "#{secure_token(10)}.#{file.try(:extension).try(:downcase)}" if original_filename.present?
    end
 
    protected
