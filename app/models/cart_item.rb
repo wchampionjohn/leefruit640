@@ -11,7 +11,7 @@ class CartItem
   end
 
   def product
-    Product.find_by(id: product_id)
+    Product::Spec.find_by(id: product_id)
   end
 
   def price

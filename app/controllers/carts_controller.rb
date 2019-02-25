@@ -2,16 +2,14 @@ class CartsController < ApplicationController
   before_action :initialize_cart
 
   def add
-    product = Product.find_by(id: params[:id])
-    if product
-      @cart.add_item(product.id)
+    spec = Product::Spec.find_by(id: params[:id])
+    if spec
+      @cart.add_item(spec.id)
       session[:my_cart] = @cart.serialize
-      flash[:notice] = "感謝您! 已加到購物車!"
+      head :no_content
     else
-      flash[:notice] = "查無此商品"
+      render json: { message: "查無此商品" }, :status => 404
     end
-
-    redirect_to products_path
   end
 
   def show
@@ -19,7 +17,6 @@ class CartsController < ApplicationController
 
   def checkout
     @order = Order.new
-    @token = Braintree::ClientToken.generate
   end
 
 end

@@ -22,7 +22,7 @@
 				</h4>
 
 				<span class="m-text17">
-				  $<%= @product.price %>
+          $ <font id="current-price"> <%= @product.specs.first.price %> </font>
 				</span>
 
 				<p class="s-text8 p-t-10">
@@ -37,9 +37,9 @@
 						</div>
 
 						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="size">
+							<select id="product-select" class="selection-2" name="size">
 							  <% @product.specs.each do |spec| %>
-                <option><%= spec.title %></option>
+                <option value="<%= spec.id %>" data-price="<%= spec.price %>"><%= spec.title %></option>
 							  <% end %>
 							</select>
 						</div>
@@ -51,7 +51,7 @@
 									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 								</button>
 
-								<input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+								<input id="current-quantity" class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
 
 								<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
 									<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
@@ -60,7 +60,7 @@
 
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								<!-- Button -->
-								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onClick="addItem()">
 									加入購物車
 								</button>
 							</div>
@@ -89,32 +89,34 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function(){
-		$(".selection-1").select2({
-			minimumResultsForSearch: 20,
-		});
-
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,
 		});
-		$('.block2-btn-addcart').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
 
-		$('.block2-btn-addwishlist').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
+    $("#product-select").change(function(){
+      var price = $(this).find("option:selected").data('price')
+      $("#current-price").html(price);
+    })
 
-		$('.btn-addcart-product-detail').each(function(){
-			var nameProduct = $('.product-detail-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
   })
+
+  function addItem()
+  {
+    var id = $("#product-select option:selected").val();
+
+    var quantity = $('#current-quantity').val()
+    url = "/cart/add/" + id + "/" + quantity
+
+    $.ajax({
+      url: url,
+      type: "post"
+    })
+    .done(function( data ) {
+      var nameProduct = $('.product-detail-name').html();
+      swal(nameProduct, "成功加入購物車", "success");
+    })
+    .fail(function(xhr, status, error) {
+      swal(nameProduct, "加入購物車失敗", "error");
+    })
+  }
 </script>

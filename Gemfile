@@ -36,6 +36,8 @@ gem 'mysql2'
 gem 'devise'
 gem 'carrierwave'
 gem 'fog-aws'
+gem 'state_machine'
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

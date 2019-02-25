@@ -10,11 +10,12 @@ Rails.application.routes.draw do
 
   get 'index/index'
   resource :cart, only:[:show, :destroy] do
-    #member do
-      #post "add", path:'add/:id'
-      #get "checkout"
-    #end
+    member do
+      post :add, path: 'add/:id/(:quantity)'
+      get "checkout"
+    end
   end
+  resources :orders, only:[:new, :create]
 
   root "index#index"
 

@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :address, :phone])
   end
+
+  private
+  def initialize_cart
+    @cart = Cart.build_from_hash(session[:my_cart])
+  end
 end
