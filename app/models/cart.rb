@@ -18,6 +18,15 @@ class Cart
     end
   end
 
+  def update_quantity(id, quantity)
+    item = items.find { |t| t.product_id == id }
+    item.quantity = quantity
+  end
+
+  def destroy_item id
+    items.delete_if { |t| t.product_id == id }
+  end
+
   def empty?
     items.empty?
   end
@@ -42,4 +51,11 @@ class Cart
     items.inject(0) { |s, item| s + item.price }
   end
 
+  def items_count
+    items.inject(0) { |s, item| s + item.quantity }
+  end
+
+  def clear!
+    @item = []
+  end
 end

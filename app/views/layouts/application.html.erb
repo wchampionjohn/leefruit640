@@ -21,7 +21,8 @@
 				</div>
 				<div class="topbar-child2">
 				  <% if  user_signed_in? %>
-          <%= link_to("Hi #{current_user.name}", edit_user_registration_path, class: 'topbar-email') %>
+          <%#= link_to("Hi #{current_user.name}", edit_user_registration_path, class: 'topbar-email') %>
+          <%= link_to("我的訂單", orders_path, class: 'topbar-email') %>
 					<div class="topbar-language rs1-select2">
 					<span class="topbar-email m-1">
 					  <%= link_to('登出', destroy_user_session_path, class: 'topbar-email', method: 'delete') %>
@@ -36,93 +37,71 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
-          <%= image_tag 'icons/logo.jpg', alt: "IMG-LOGO", height: "60", width:"60" %>
-				</a>
+				  <%= link_to(root_path, class: 'logo') do %>
+            <%= image_tag 'icons/logo.jpg', alt: "IMG-LOGO", height: "60", width:"60" %>
+				  <% end %>
 				<%= render partial: 'shared/menu' %>
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
+				  <%= link_to(edit_user_registration_path, class: 'header-wrapicon1 dis-block') do %>
             <%= image_tag 'icons/icon-header-01.png', class: "header-icon1", alt: "ICON" %>
-					</a>
+				  <% end %>
 
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2">
             <%= image_tag 'icons/icon-header-02.png', class: "header-icon1 js-show-header-dropdown", alt: "ICON" %>
-						<span class="header-icons-noti">0</span>
+						<span class="header-icons-noti"><%= cart_items_count %></span>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
+							  <% @cart.items.each do |item| %>
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-                    <%= image_tag 'item-cart-01.jpg', alt: "IMG" %>
+                    <%= image_tag "#{item.product.image.url}", alt: "IMG" %>
 									</div>
 
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
+										  <%= item.product.full_title %>
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $19.00
+											<%= item.quantity %> x <%= item.product.price %>
 										</span>
 									</div>
 								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-                    <%= image_tag 'item-cart-02.jpg', alt: "IMG" %>
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-                    <%= image_tag 'item-cart-03.jpg', alt: "IMG" %>
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
+								<% end %>
 							</ul>
 
-							<div class="header-cart-total">
-								Total: $75.00
-							</div>
+                <% if@cart.items.size > 0 %>
+                  <div class="header-cart-total">
+                    Total: <%= @cart.total_price %>
+                  </div>
 
-							<div class="header-cart-buttons">
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										View Cart
-									</a>
-								</div>
+                  <div class="header-cart-buttons">
+                    <div class="header-cart-wrapbtn">
+                      <!-- Button -->
+                      <%= link_to(checkout_cart_path, class: 'flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4') do %>
+                        查看購物車
+                      <% end %>
+                    </div>
 
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
-									</a>
-								</div>
-							</div>
+                    <% if@cart.items.size > 0 %>
+                    <div class="header-cart-wrapbtn">
+                      <!-- Button -->
+                      <%= link_to(new_order_path, class: 'flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4') do %>
+                      結帳
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                  <%  else%>
+                  <div class="header-cart-buttons ">
+                    <span class="s-text7">目前未有任何商品加入購物車</span>
+                  </div>
+                <% end %>
 						</div>
 					</div>
 				</div>
@@ -132,9 +111,9 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="index.html" class="logo-mobile">
-        <%= image_tag 'icons/logo.png', alt: "IMG-LOGO" %>
-			</a>
+      <%= link_to(root_path, class: 'logo-mobile') do %>
+        <%= image_tag 'icons/logo.jpg', alt: "IMG-LOGO", height: "60", width:"60", style: "max-height:60px" %>
+      <% end %>
 
 			<!-- Button show menu -->
 			<div class="btn-show-menu">
@@ -147,78 +126,52 @@
 					<span class="linedivide2"></span>
 
 					<div class="header-wrapicon2">
-            <%= image_tag 'icons/icon-header-01.png', class: 'header-icon1 js-show-header-dropdown', alt: "ICON" %>
-						<span class="header-icons-noti">0</span>
+            <%= image_tag 'icons/icon-header-02.png', class: 'header-icon1 js-show-header-dropdown', alt: "ICON" %>
+						<span class="header-icons-noti"><%= cart_items_count %></span>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
+
+							<ul class="header-cart-wrapitem">
+							  <% @cart.items.each do |item| %>
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-                    <%= image_tag 'item-cart-01.jpg', alt: "IMG" %>
+                    <%= image_tag "#{item.product.image.url}", alt: "IMG" %>
 									</div>
 
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
+										  <%= item.product.full_title %>
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $19.00
+											<%= item.quantity %> x <%= item.product.price %>
 										</span>
 									</div>
 								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-                    <%= image_tag 'item-cart-02.jpg', alt: "IMG" %>
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-                    <%= image_tag 'item-cart-03.jpg', alt: "IMG" %>
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
+								<% end %>
 							</ul>
 
+              </ul>
+
 							<div class="header-cart-total">
-								Total: $75.00
+								Total: <%= @cart.total_price %>
 							</div>
 
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										View Cart
-									</a>
+									<%= link_to(checkout_cart_path, class: 'flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4') do %>
+										查看購物車
+                  <% end %>
 								</div>
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
-									</a>
+									<%= link_to(new_order_path, class: 'flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4') do %>
+										結帳
+                  <% end %>
 								</div>
 							</div>
 						</div>
@@ -253,31 +206,7 @@
               <a href="https://www.facebook.com/leefruit640/" target="_blank" class="topbar-social-item fa fa-facebook"></a>
 						</div>
 					</li>
-
-
-					<li class="item-menu-mobile">
-						<a href="product.html">首頁</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.html">帝王柑</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="product.html">關於李媽媽青果社</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.html">訂購流程</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">部落格</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="about.html">聯絡我們</a>
-					</li>
+				<%= render partial: 'shared/mobile_menu' %>
 				</ul>
 			</nav>
 		</div>

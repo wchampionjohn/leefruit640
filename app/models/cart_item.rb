@@ -10,6 +10,10 @@ class CartItem
     @quantity = @quantity + 1
   end
 
+  def quantity= quantity
+    @quantity = quantity
+  end
+
   def product
     Product::Spec.find_by(id: product_id)
   end

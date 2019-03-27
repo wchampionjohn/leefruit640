@@ -1,0 +1,49 @@
+<section class="cart bgwhite p-t-70 p-b-100">
+		<div class="container">
+					<h4 class="m-text26 p-t-15 p-b-16">
+            我的訂單
+					</h4>
+			<%#<div class="flex-w flex-sb-m p-t-25 p-b-25 p-l-35 p-r-60 p-lr-15-sm">%>
+				<%#<div class="size10 trans-0-4 m-t-10 m-b-10">%>
+					<%#[> Button <]%>
+					<%#<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">%>
+						<%#Update Cart%>
+					<%#</button>%>
+				<%#</div>%>
+			<%#</div>%>
+			<!-- Cart item -->
+			<div class="container-table-cart pos-relative">
+				<div class="wrap-table-shopping-cart bgwhite">
+					<table class="table-shopping-cart">
+						<tbody><tr class="table-head">
+							<th class="column-1">訂單成立日期</th>
+							<th class="column-3">訂單狀態</th>
+							<th class="column-2">購買商品</th>
+							<th class="column-3">商品總數</th>
+							<th class="column-3">總價</th>
+							<th class="column-3"></th>
+						</tr>
+
+            <% @orders.each do |order| %>
+						<tr class="table-row">
+							<td class="column-1">
+							  <%= order.created_at.strftime("%F") %>
+							</td>
+							<td class="column-5">待出貨</td>
+							<td class="column-3"><%= order.product_title %></td>
+							<td class="column-5">
+							  <%= order.total_product %>
+							</td>
+							<td class="column-5"><%= order.total_price %> </td>
+              <td class="column-5">
+                <%= link_to("詳細資訊", order_path(order.id), class: '') %>
+              </td>
+						</tr>
+						<% end %>
+					</tbody>
+          </table>
+				</div>
+			</div>
+
+		</div>
+	</section>

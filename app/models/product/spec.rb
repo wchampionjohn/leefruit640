@@ -5,4 +5,5 @@ class Product::Spec < ApplicationRecord
   def full_title
     "#{product.title} - #{title}"
   end
+
 end

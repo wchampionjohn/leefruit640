@@ -31,6 +31,18 @@
           class: "sizefull s-text7 p-l-22 p-r-22" %>
         </div>
 
+        <div class="bo4 of-hidden size15 m-b-20 rs2-select2">
+          <%= f.collection_select(:city_id, City.all, :id, :name, {},{
+          placeholder: "縣市",
+          class: "selection-2 select2-hidden-accessible"}) %>
+        </div>
+
+        <div class="bo4 of-hidden size15 m-b-20 rs2-select2">
+          <%= f.collection_select(:area_id, @area_options, :id, :name, {},{
+          placeholder: "鄉鎮區",
+          class: "selection-2 select2-hidden-accessible"}) %>
+        </div>
+
         <div class="bo4 of-hidden size15 m-b-20">
           <%= f.text_field :address,
           placeholder: "地址",
@@ -56,3 +68,26 @@
     </div>
   </div>
 </section>
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+		});
+
+
+    $("#user_city_id").change(function(){
+      var cityId = $(this).val();
+      var areaSelect = $("#user_area_id");
+
+      $.ajax({
+        url: "/cities/" + cityId + "/areas"
+      }).done(function(result) {
+        console.log(result)
+        areaSelect.html('');
+         $.each(result.data, function (index, area) {
+              areaSelect.append('<option value="' + area.id + '">' + area.name + '</option>');
+           });
+      });
+    })
+  })
+</script>

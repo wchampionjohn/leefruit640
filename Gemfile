@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'jquery-ui-rails'
+gem 'jquery-rails'
 gem 'pg'
 gem 'rails_12factor'
 gem 'mysql2'
@@ -38,6 +40,7 @@ gem 'carrierwave'
 gem 'fog-aws'
 gem 'state_machine'
 gem 'simple_form'
+gem 'devise-i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

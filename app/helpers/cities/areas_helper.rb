@@ -1,0 +1,2 @@
+module Cities::AreasHelper
+end

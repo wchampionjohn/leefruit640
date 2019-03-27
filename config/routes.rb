@@ -12,10 +12,20 @@ Rails.application.routes.draw do
   resource :cart, only:[:show, :destroy] do
     member do
       post :add, path: 'add/:id/(:quantity)'
+      post :update_quantity, path: 'update/:id'
+      delete :remove, path: 'remove/:id'
       get "checkout"
     end
   end
-  resources :orders, only:[:new, :create]
+  resources :orders, only:[:index, :new, :create, :show]
+
+  resources :cities, only:[] do
+    scope module: :cities do
+      member do
+        resources :areas, only:[:index]
+      end
+    end
+  end
 
   root "index#index"
 

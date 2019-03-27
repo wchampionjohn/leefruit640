@@ -59,39 +59,27 @@
         會員資料
       </h5>
 
+      <hr />
+
       <div class="flex-w flex-sb">
         <span class="s-text18 w-size19 w-full-sm">
           姓名:
         </span>
         <div class="w-size20 w-full-sm">
-          <div class="size13 bo4 m-t-8 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="姓名">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @user.name %></span>
           </div>
         </div>
       </div>
       <!--  -->
+
       <div class="flex-w flex-sb">
         <span class="s-text18 w-size19 w-full-sm">
           地址:
         </span>
         <div class="w-size20 w-full-sm">
-          <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-            <select class="selection-2" name="country">
-              <option> 台北市 </option>
-              <option> 新北市 </option>
-            </select>
-          </div>
-          <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-            <select class="selection-2" name="country">
-              <option> 大安區 </option>
-              <option> 中正區 </option>
-            </select>
-          </div>
-          <div class="size13 bo4 m-t-8 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="郵遞區號">
-          </div>
-          <div class="size13 bo4 m-t-8 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="地址">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @user.full_address %></span>
           </div>
         </div>
       </div>
@@ -101,25 +89,45 @@
           電話:
         </span>
         <div class="w-size20 w-full-sm">
-          <div class="size13 bo4 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="電話">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @user.phone %></span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="bo9 p-l-120 p-r-120 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-      <h5 class="m-text20 p-b-24">
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+      <h5 class="m-text20 p-b-12">
         收件人資料
       </h5>
+        </span>
+        <div class="s-text18 w-size20 w-full-sm">
+              <div class="checkbox">
+                <label>
+                  <input id="sync-member" type="checkbox" value="">
+                  同會員資料
+                </label>
+              </div>
+        </div>
+      </div>
+      <hr />
 
+      <%= simple_form_for(@order) do |f| %>
+      <input id="user-name" type="hidden" value="<%= @user.name %>">
+      <input id="user-city-id" type="hidden" value="<%= @user.city_id %>">
+      <input id="user-area-id" type="hidden" value="<%= @user.area_id %>">
+      <input id="user-address" type="hidden" value="<%= @user.address %>">
+      <input id="user-phone" type="hidden" value="<%= @user.phone %>">
       <div class="flex-w flex-sb">
         <span class="s-text18 w-size19 w-full-sm">
           姓名:
         </span>
         <div class="w-size20 w-full-sm">
           <div class="size13 bo4 m-t-8 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="姓名">
+            <%= f.input_field :name,label: false,  class: 'sizefull s-text7 p-l-15 p-r-15', placeholder: '姓名' %>
           </div>
         </div>
       </div>
@@ -130,22 +138,13 @@
         </span>
         <div class="w-size20 w-full-sm">
           <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-            <select class="selection-2" name="country">
-              <option> 台北市 </option>
-              <option> 新北市 </option>
-            </select>
+            <%= f.select(:city_id, City.all.map { |city| [city.name, city.id] }, {}, {class: "selection-2 select2-hidden-accessible"}) %>
           </div>
           <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-            <select class="selection-2" name="country">
-              <option> 大安區 </option>
-              <option> 中正區 </option>
-            </select>
+            <%= f.select(:area_id, @area_options.map { |area| [area.name, area.id] }, {}, {class: "selection-2 select2-hidden-accessible"}) %>
           </div>
           <div class="size13 bo4 m-t-8 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="郵遞區號">
-          </div>
-          <div class="size13 bo4 m-t-8 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="地址">
+            <%= f.input_field :address, class: 'sizefull s-text7 p-l-15 p-r-15', placeholder: '街道、門牌號碼' %>
           </div>
         </div>
       </div>
@@ -156,7 +155,7 @@
         </span>
         <div class="w-size20 w-full-sm">
           <div class="size13 bo4 m-b-12">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="電話">
+            <%= f.input_field :phone, class: 'sizefull s-text7 p-l-15 p-r-15', placeholder: '聯絡電話' %>
           </div>
         </div>
       </div>
@@ -168,10 +167,11 @@
           <div class="size13 m-b-12">
             <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
 								送出訂單
-							</button>
+            </button>
           </div>
         </div>
       </div>
+      <% end %>
     </div>
 
     </div>
@@ -182,5 +182,35 @@
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,
 		});
+    $("#order_city_id").change(function(){
+      var cityId = $(this).val();
+      var areaSelect = $("#order_area_id");
+
+      $.ajax({
+        url: "/cities/" + cityId + "/areas"
+      }).done(function(result) {
+        console.log(result)
+        areaSelect.html('');
+         $.each(result.data, function (index, area) {
+              areaSelect.append('<option value="' + area.id + '">' + area.name + '</option>');
+           });
+      });
+    });
+
+    $("#sync-member").change(function(){
+      if ($(this).is( ":checked" )) {
+        var name = $("#user-name").val();
+        $("#order_name").val(name);
+        var cityId = $("#user-city-id").val();
+        $("#order_city_id").val(cityId).trigger('change');
+        var areaId = $("#user-area-id").val();
+        $("#order_area_id").val(areaId).trigger('change');
+        var address = $("#user-address").val();
+        $("#order_address").val(address);
+        var phone = $("#user-phone").val();
+        $("#order_phone").val(phone);
+      }
+    })
+
   })
 </script>

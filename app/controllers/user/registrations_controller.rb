@@ -4,7 +4,26 @@ class User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
+  before_action only: [:edit] do
+    @area_options = Area.where(city_id: current_user.city_id)
+  end
+
+  before_action only: [:new] do
+    @area_options = Area.where(city_id: City.first.id)
+  end
+
+  before_action only: [:update] do
+    city_id = params[:user][:city_id] || current_user.city_id
+    @area_options = Area.where(city_id: city_id)
+  end
+
+  before_action only: [:create] do
+    city_id = params[:user][:city_id] || City.first.id
+    @area_options = Area.where(city_id: city_id)
+  end
+
   # GET /resource/sign_up
+
   # def new
   #   super
   # end
@@ -41,13 +60,13 @@ class User::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+   def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :address, :phone, :city_id, :area_id])
+   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :address, :phone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :address, :phone, :city_id, :area_id])
   end
 
   # The path used after sign up.

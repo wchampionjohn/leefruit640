@@ -1,0 +1,151 @@
+
+<section class="cart bgwhite p-t-30 p-b-100">
+  <div class="container">
+    <div class="wrap-table-shopping-cart bgwhite">
+    <div class="p-l-20 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+      <h5 class="m-text20 p-b-24">
+        訂單資料
+      </h5>
+
+			<div class="container-table-cart pos-relative">
+				<div class="wrap-table-shopping-cart bgwhite">
+					<table class="table-shopping-cart">
+						<tr class="table-head">
+							<th class="column-1"></th>
+							<th class="column-2">商品名稱</th>
+							<th class="column-3">價格</th>
+							<th class="column-4">數量</th>
+							<th class="column-5">小記</th>
+						</tr>
+
+            <% @order.order_items.each do |item| %>
+              <tr class="table-row">
+                <td class="column-1">
+                  <div class="cart-img-product b-rad-4 o-f-hidden">
+                    <img src="<%= item.product.image.url %>" alt="IMG-PRODUCT">
+                  </div>
+                </td>
+                <td class="column-2"><%= item.product.full_title %></td>
+                <td class="column-3"><%= item.product.price %></td>
+                <td class="column-4">
+                  <%= item.quantity %>
+                </td>
+                <td class="column-5"><%= item.price %></td>
+              </tr>
+            <% end %>
+					</table>
+				</div>
+      </div>
+
+			<div class="bo9 w-size18 p-l-20 p-r-20 p-t-15 p-b-19 m-t-15 m-r-0 m-l-auto p-lr-15-sm">
+				<!--  -->
+				<div class="flex-w flex-sb-m p-t-26 p-b-30">
+					<span class="m-text22 w-size19 w-full-sm">
+						總計:
+					</span>
+
+					<span class="m-text21 w-size20 w-full-sm">
+            <%= @cart.total_price  %>
+					</span>
+				</div>
+
+			</div>
+
+    </div>
+    </div>
+
+    <div class="wrap-table-shopping-cart bgwhite">
+    <div class="bo9 p-l-120 p-r-120 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+      <h5 class="m-text20 p-b-24">
+        訂單資訊
+      </h5>
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          狀態:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15">待出貨</span>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          成立日期:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @order.created_at.strftime("%F") %></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          預計出貨日期:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= (@order.created_at + 2.days).strftime("%F") %></span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          實際出貨日期:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"> - </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bo9 p-l-120 p-r-120 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+      <h5 class="m-text20 p-b-24">
+        收件人
+      </h5>
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          姓名:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @order.name %></span>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          地址:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @order.full_address %></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-w flex-sb">
+        <span class="s-text18 w-size19 w-full-sm">
+          電話:
+        </span>
+        <div class="w-size20 w-full-sm">
+          <div class="size13 m-t-8 m-b-12">
+            <span class="sizefull s-text7 p-l-15 p-r-15"><%= @order.phone %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</section>

@@ -10,31 +10,44 @@
 							<th class="column-3">價格</th>
 							<th class="column-4 p-l-70">數量</th>
 							<th class="column-5">小記</th>
+							<th class="column-5"></th>
 						</tr>
 
             <% @cart.items.each do |item| %>
               <tr class="table-row">
                 <td class="column-1">
                   <div class="cart-img-product b-rad-4 o-f-hidden">
-                    <img src="<%= item.product.image.url %>" alt="IMG-PRODUCT">
+                    <img src="<%= item.product.image.url %>" alt="IMG-PRODUCT" class="product-img">
                   </div>
                 </td>
                 <td class="column-2"><%= item.product.full_title %></td>
                 <td class="column-3"><%= item.product.price %></td>
                 <td class="column-4">
                   <div class="flex-w bo5 of-hidden w-size17">
-                    <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                    <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" data-id="<%= item.product.id %>">
                       <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                     </button>
 
-                    <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="<%= item.quantity %>">
+                    <input class="size8 m-text18 t-center num-product" data-id="<%= item.product.id %>" data-price="<%= item.product.price %>"  type="number" id="num-product-<%= item.product.id %>" value="<%= item.quantity %>">
 
-                    <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                    <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" data-id="<%= item.product.id %>">
                       <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                     </button>
                   </div>
                 </td>
-                <td class="column-5"><%= item.price %></td>
+                <td id="sum-product-<%= item.product.id %>" class="column-5 sum-product"><%= item.price %></td>
+                <td class="column-5">
+                  <%= link_to("X", remove_cart_path(item.product.id), :method => 'delete', data: {confirm: "確定將此商品從購物車移除嗎?" }) %>
+
+                </td>
+              </tr>
+            <% end %>
+
+            <% if @cart.items.try(:blank?) %>
+              <tr class="table-row">
+                <td align="center" class="column-1" colspan="5">
+                  目前沒任何商品
+                </td>
               </tr>
             <% end %>
 					</table>
@@ -49,17 +62,90 @@
 						總計:
 					</span>
 
-					<span class="m-text21 w-size20 w-full-sm">
+					<span id="total" class="m-text21 w-size20 w-full-sm">
             <%= @cart.total_price  %>
 					</span>
 				</div>
 
-				<div class="size15 trans-0-4">
-					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						結帳
-					</button>
-				</div>
+        <% if @cart.items.size > 0 %>
+        <div class="size15 trans-0-4">
+          <!-- Button -->
+          <%= link_to("結帳", new_order_path, class: 'flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4') %>
+        </div>
+        <% end %>
 			</div>
 		</div>
 	</section>
+
+  <script type="text/javascript" charset="utf-8">
+    $(".btn-num-product-down").click(function(){
+      var productId = $(this).data('id')
+      quantity = parseInt($("#num-product-" + productId).val());
+      quantity -= 1;
+
+      var timer
+      clearTimeout(timer);
+      timer = window.setTimeout(function() {
+        updateQuantity(productId, quantity);
+      }, 500);
+    });
+
+    $(".btn-num-product-up").click(function(){
+      var productId = $(this).data('id')
+      quantity = parseInt($("#num-product-" + productId).val());
+      quantity += 1;
+
+      var timer
+      clearTimeout(timer);
+      timer = window.setTimeout(function() {
+        updateQuantity(productId, quantity);
+      }, 500);
+    })
+
+    $(".num-product").change(function() {
+      var productId = $(this).data('id')
+      quantity = parseInt($("#num-product-" + productId).val());
+
+      console.log(productId)
+      console.log(quantity)
+
+      var timer
+      clearTimeout(timer);
+      timer = window.setTimeout(function() {
+        updateQuantity(productId, quantity);
+      }, 500);
+
+    })
+
+    function updateQuantity(id, quantity) {
+        $.post( "/cart/update/" + id, { quantity:  quantity })
+        .done(function( data ) {
+          calculate();
+        })
+        .fail(function(xhr, status, error) {
+          console.log(xhr.responseJSON);
+        })
+    }
+
+    function calculate() {
+      $(".num-product").each(function(){
+        var id = $(this).data('id');
+        var quantity = $(this).val();
+        var price = $(this).data('price');
+        var sum = quantity * price;
+
+        $("#sum-product-" + id).html(sum);
+
+        var total = 0;
+        $(".sum-product").each(function(){
+          total += parseInt($(this).html());
+        })
+
+        $("#total").html(total);
+
+      })
+
+
+    }
+
+  </script>

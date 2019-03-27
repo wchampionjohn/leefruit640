@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190219130152) do
+ActiveRecord::Schema.define(version: 20190312133821) do
+
+  create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.integer "city_id"
+    t.integer "zip_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "article_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -38,6 +46,12 @@ ActiveRecord::Schema.define(version: 20190219130152) do
   create_table "blogs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,8 +86,11 @@ ActiveRecord::Schema.define(version: 20190219130152) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.string "tel"
+    t.string "phone"
     t.string "address"
+    t.integer "user_id"
+    t.integer "city_id"
+    t.integer "area_id"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,6 +131,8 @@ ActiveRecord::Schema.define(version: 20190219130152) do
     t.string "phone"
     t.string "address"
     t.string "name"
+    t.integer "city_id"
+    t.integer "area_id"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
