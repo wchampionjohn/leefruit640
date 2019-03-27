@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     order = Order.new(order_params)
     order.user_id = current_user.id
     @cart.items.each do |item|
-      order.order_items.new(product_spec_id: item.product.id, quantity: item.quantity)
+      order.order_items.new(product_id: item.product.id, quantity: item.quantity)
     end
 
     if order.save!
