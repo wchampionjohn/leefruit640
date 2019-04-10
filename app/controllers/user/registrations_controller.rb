@@ -42,6 +42,30 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def update
   #   super
   # end
+  #
+ def update
+    account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
+    @user = User.find(current_user.id)
+
+    # required for settings form to submit when password is left blank
+    if @user.login_social?
+      account_update_params.delete("password")
+      account_update_params.delete("password_confirmation")
+      account_update_params.delete("current_password")
+
+      if @user.update_attributes(account_update_params)
+        set_flash_message :notice, :updated
+        # Sign in the user bypassing validation in case their password changed
+        sign_in @user, :bypass => true
+        redirect_to after_update_path_for(@user)
+      else
+        render "edit"
+      end
+    else
+      super
+    end
+
+  end
 
   # DELETE /resource
   # def destroy
@@ -69,6 +93,7 @@ class User::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :address, :phone, :city_id, :area_id])
   end
 
+
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
@@ -78,4 +103,22 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  #
+  protected
+
+  #def update_resource(resource, params)
+    #resource.update_without_password(params)
+  #end
+  #def update_resource(resource, params)
+    #resource.update_without_password(params)
+  #end
+  #
+
+  # check if we need password to update user data
+  # ie if password or email was changed
+  # extend this as needed
+  def needs_password?(user, params)
+    user.email != params[:user][:email] ||
+      params[:user][:password].present?
+  end
 end

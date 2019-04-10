@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     :users,
     controllers: {
       sessions: "user/sessions",
-      registrations: "user/registrations"
+      registrations: "user/registrations",
+      omniauth_callbacks: "user/omniauth_callbacks"
     }
   )
   get 'products/show'
