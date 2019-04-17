@@ -39,6 +39,6 @@ class OrdersController < ApplicationController
   end
   private
   def order_params
-    params.require(:order).permit(:name, :phone,:city_id, :area_id, :address, :email)
+    params.require(:order).permit(:name, :phone,:city_id, :area_id, :address, :email, :note)
   end
 end

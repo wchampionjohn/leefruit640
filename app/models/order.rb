@@ -3,7 +3,19 @@ class Order < ApplicationRecord
   belongs_to :city
   belongs_to :area
 
-  validates_presence_of :name, :address, :city, :area
+  validates_presence_of :name, :address, :city, :area, :phone
+  validates :name,
+    presence: false,
+    length: { minimum: 2, maximum: 40 }
+  validates :phone,
+    presence: false,
+    length: { minimum: 8, maximum: 16 }
+  validates :address,
+    presence: false,
+    length: { minimum: 2, maximum: 255 }
+  validates :note,
+    presence: false,
+    length: { minimum: 0, maximum: 2000 }
 
   def total_product
     order_items.reduce(0) { |result, item| result += item.quantity }
