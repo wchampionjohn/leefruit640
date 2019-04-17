@@ -104,7 +104,7 @@
   {
     var id = $("#product-select option:selected").val();
 
-    var quantity = $('#current-quantity').val()
+    var quantity = $("input[name='num-product']").val();
     url = "/cart/add/" + id + "/" + quantity
 
     $.ajax({
@@ -114,6 +114,7 @@
     .done(function( data ) {
       var nameProduct = $('.product-detail-name').html();
       swal(nameProduct, "成功加入購物車", "success");
+      setTimeout(location.reload.bind(location), 2000);
     })
     .fail(function(xhr, status, error) {
       swal(nameProduct, "加入購物車失敗", "error");

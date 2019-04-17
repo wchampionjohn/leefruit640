@@ -1,9 +1,11 @@
 class CartsController < ApplicationController
 
   def add
+    quantity = params[:quantity].to_i
     spec = Product::Spec.find_by(id: params[:id])
+
     if spec
-      @cart.add_item(spec.id)
+      @cart.add_item(spec.id, quantity)
       session[:my_cart] = @cart.serialize
       head :no_content
     else
@@ -14,7 +16,6 @@ class CartsController < ApplicationController
   def show
   end
   def update_quantity
-    # TODO 試看看用service object 重構
     quantity = params[:quantity].to_i
     spec_id = params[:id].to_i
 

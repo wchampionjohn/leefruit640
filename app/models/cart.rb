@@ -5,16 +5,14 @@ class Cart
     @items = items
   end
 
-  def add_item(id)
+  def add_item(id, quantity = 1)
     # find item
     item = items.find { |t| t.product_id == id }
 
-    # if item exists, + quantity
-    # else push a new item
     if item
-      item.increment
+      item.increment quantity
     else
-      items << CartItem.new(id)
+      items << CartItem.new(id, quantity)
     end
   end
 

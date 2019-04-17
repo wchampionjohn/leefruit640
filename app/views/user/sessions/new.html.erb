@@ -26,13 +26,17 @@
           <%= link_to("註冊", new_user_registration_path, class: 'flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4') %>
         </div>
         <% end %>
-<div class="of-hidden size15 m-b-20">
-          <!-- Button -->
-
+        <div class="of-hidden size15 m-b-20">
           <%= link_to(user_facebook_omniauth_authorize_path, class: 'flex-c-m sizefull bg9 bo-rad-23 hov1 s-text1 trans-0-4') do %>
-            <i class="fa fa-facebook"></i>&nbsp;
-            使用Facebook 登入
-        <% end %>
+          <i class="fa fa-facebook"></i>&nbsp;
+          使用Facebook帳號登入
+          <% end %>
+        </div>
+        <div class="of-hidden size15 m-b-20">
+          <%= link_to(user_google_oauth2_omniauth_authorize_path, class: 'flex-c-m sizefull bg10 bo-rad-23 hov1 s-text1 trans-0-4') do %>
+          <i class="fa fa-google"></i>&nbsp;
+          使用Google帳號登入
+          <% end %>
         </div>
       </div>
     </div>
