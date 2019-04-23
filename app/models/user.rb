@@ -14,7 +14,7 @@ class User < ApplicationRecord
   #validates :password_confirmation, presence: true, if: :not_login_social?
 
   def full_address
-    "#{city.name}#{area.name}#{address}"
+    "#{city.try(:name)}#{area.try(:name)}#{address}"
   end
 
   def login_social?
