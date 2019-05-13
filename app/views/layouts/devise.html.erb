@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShoppingCart</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+  <%= render partial: 'shared/toastr' %>
+
+  <body class=" login">
+    <div class="logo">
+      <a href="index.html">
+        <%#<%= image_tag('logo-big.png', alt: "") %>
+      </a>
+    </div>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>

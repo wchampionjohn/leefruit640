@@ -1,0 +1,52 @@
+<%= simple_form_for [:admin, current_object], html: { class: 'form-horizontal' } do |f| %>
+  <%= hidden_field(:product, :id, value: current_object.id) %>
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: admin_products_path } %>
+<div class="form-body">
+  <%= f.input :name, input_html: {class: 'form-control', class: 'input-large'} %>
+  <%= f.input :price, input_html: {class: 'form-control', class: 'input-large'} %>
+  <%= f.input :is_public, as: :boolean %>
+  <%= f.input :description, input_html: {class: 'form-control input-xlarge', rows: '12'} %>
+  <%= f.input :description_2, as: :text,input_html: {class: 'form-control input-xlarge', rows: '12'} %>
+  <div class="form-group m-form__group row">
+    <label class="col-md-2 control-label">
+      圖片
+    </label>
+    <div class="col-md-6">
+      <div class="col-sm-6 col-md-3" v-for="(image, index) in images">
+        <img :src="image.file_url " height="106" width="120">
+        <div style="margin:2px;  padding-right:0px; text-align: center;">
+          <a type="button" target="_blank" :href="image.file_url" class="btn m-btn--pill btn-danger" data-placement="left">
+            <i class="fa fa-eye"></i>
+          </a>
+          <button type="button" class="btn m-btn--pill btn-danger" data-placement="left" data-title="Do you agree to the Terms and Conditions?"  v-on:click="removeImages(image.id)">
+             <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group m-form__group row">
+    <label class="col-md-2 control-label">
+    </label>
+    <div class="col-md-6">
+      <div class="m-dropzone dropzone m-dropzone--primary" id="dropzone">
+        <div class="m-dropzone__msg dz-message needsclick">
+          <h3 class="m-dropzone__msg-title">
+            拖曳或點擊後上傳
+          </h3>
+          <span class="m-dropzone__msg-desc">
+            最多可上傳10個檔案
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <%= render partial: "specs", locals: { product_id: current_object.id, specs: current_object.specs } %>
+
+</div>
+
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: admin_products_path } %>
+<% end %>

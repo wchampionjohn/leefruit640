@@ -1,0 +1,11 @@
+<%= simple_form_for current_object, url: url, html: { class: 'form-horizontal' } do |f| %>
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: edit_admin_product_path(@product) } %>
+<div class="form-body">
+  <%= f.input :product_id, as: :hidden, input_html: {value: @product.id, class: 'form-control', class: 'input-large'} %>
+  <%= f.input :title, input_html: {class: 'form-control', class: 'input-large'} %>
+  <%= f.input :price, input_html: {class: 'form-control', class: 'input-large'} %>
+  <%= f.input :image, as: :image %>
+</div>
+
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: edit_admin_product_path(@product) } %>
+<% end %>

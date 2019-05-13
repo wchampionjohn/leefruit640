@@ -1,0 +1,9 @@
+zh-TW:
+  activerecord:
+    models:
+      produc/spec: '商品規格'
+    attributes:
+      product/spec:
+        title: '名稱'
+        price: '價格'
+        image: '圖片'

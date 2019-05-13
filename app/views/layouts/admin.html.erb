@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>李媽媽青果社 管理員後台</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+  <%= render partial: 'shared/toastr' %>
+  <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-full-width">
+    <div class="page-wrapper">
+      <div class="page-header navbar navbar-fixed-top">
+        <div class="page-header-inner ">
+          <div class="page-logo">
+            <a href="javascript:void(0);">
+              <%= image_tag('logo.jpg', style: "max-width: 50px") %>
+            </a>
+          </div>
+          <%= render partial: 'shared/admin_menu'  %>
+        </div>
+      </div>
+      <div class="clearfix"> </div>
+      <div class="page-container">
+        <div class="page-sidebar-wrapper">
+          <div class="page-content-wrapper">
+            <div class="page-content" id="app">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= javascript_pack_tag "#{ request.params['controller'] }/#{ action_name }" rescue '' %>
+  </body>
+</html>

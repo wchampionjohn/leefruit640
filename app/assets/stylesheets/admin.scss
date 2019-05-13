@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require font-awesome
+ *= require ./metronic/bootstrap.min
+ *= require ./metronic/layout.min
+ *= require ./metronic//themes/darkblue.min
+ *= require ./metronic/custom.min
+ *= require_directory ./metronic/global/
+ *= require_directory ../../../vendor/assets/stylesheets/.
+ */
+
+.ui-helper-center {
+  text-align: center;
+}
+
+.no-records-found { text-align: center; }
+.m-dropzone {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 60px;
+  text-align: center;
+  cursor: pointer; }
+  .m-dropzone .m-dropzone__msg-title {
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 1.1rem; }
+  .m-dropzone .m-dropzone__msg-desc {
+    font-size: 0.85rem; }
+  .m-dropzone .dz-preview .dz-image {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px; }
+
+.m-dropzone {
+  border: 2px dashed #ebedf2; }
+  .m-dropzone .m-dropzone__msg-title {
+    color: #575962; }
+  .m-dropzone .m-dropzone__msg-desc {
+    color: #6f727d; }
+  .m-dropzone.m-dropzone--brand {
+    border-color: #716aca; }
+  .m-dropzone.m-dropzone--metal {
+    border-color: #c4c5d6; }
+  .m-dropzone.m-dropzone--light {
+    border-color: #ffffff; }
+  .m-dropzone.m-dropzone--accent {
+    border-color: #00c5dc; }
+  .m-dropzone.m-dropzone--focus {
+    border-color: #9816f4; }
+  .m-dropzone.m-dropzone--primary {
+    border-color: #5867dd; }
+  .m-dropzone.m-dropzone--success {
+    border-color: #34bfa3; }
+  .m-dropzone.m-dropzone--info {
+    border-color: #36a3f7; }
+  .m-dropzone.m-dropzone--warning {
+    border-color: #ffb822; }
+  .m-dropzone.m-dropzone--danger {
+    border-color: #f4516c; }

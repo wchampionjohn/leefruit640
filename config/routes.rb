@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   devise_for(
     :users,
     controllers: {
@@ -33,6 +34,22 @@ Rails.application.routes.draw do
   resources :products
   resources :articles
   resources :contracts, only:[:new, :create]
+
+
+  namespace :admin do
+    root 'index#index'
+    devise_scope :admin do
+      authenticated :admin do
+        root 'products#index', as: :authenticated_root
+      end
+    end
+    resources :products do
+        scope module: :products do
+          resources :images, only: [:index, :create, :destroy]
+          resources :specs
+        end
+    end
+  end
 
   get 'about/index'
   get 'note/index'

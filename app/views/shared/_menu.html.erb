@@ -5,9 +5,12 @@
       <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == root_path %> >
         <%= link_to("首頁", root_path) %>
       </li>
-      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == product_path(1) %> >
-        <%= link_to("帝王柑", product_path(1)) %>
+      <% Product.publish.each do |product| %>
+      <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == product_path(product.id) %> >
+        <%= link_to(product.name, product_path(product.id)) %>
       </li>
+      <% end %>
+
       <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == about_index_path %> >
         <%= link_to("關於李媽媽青果社", about_index_path) %>
       </li>

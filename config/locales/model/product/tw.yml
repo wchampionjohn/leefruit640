@@ -1,0 +1,18 @@
+zh-TW:
+  activerecord:
+    models:
+      product: '產品'
+    attributes:
+      product:
+        name: '名稱'
+        price: '價格'
+        status: '商品保存狀態'
+        remain: '數量'
+        description: '商品介紹'
+        description_2: '商品描述'
+        is_public: '上架'
+        image_path: '商品圖片'
+      product/status:
+        all_new: '全新'
+        like_new: '幾乎全新'
+        used: '二手'

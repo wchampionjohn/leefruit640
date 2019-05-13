@@ -1,0 +1,35 @@
+<div class="top-menu">
+  <ul class="nav navbar-nav pull-right">
+    <li class="dropdown dropdown-user">
+      <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <img alt="" class="img-circle" src="https://ih0.redbubble.net/image.363620920.6389/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u2.jpg" style="width:20px; height:20px">
+        <span class="username username-hide-on-mobile"> <%= current_admin.try(:email) %> </span>
+        <i class="fa fa-angle-down"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-default">
+        <li>
+          <%= link_to('登出', destroy_admin_session_path, method: :delete) %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="hor-menu hidden-sm hidden-xs">
+  <ul class="nav navbar-nav">
+    <li class="classic-menu-dropdown  aria-haspopup="true">
+      <%= link_to("商品", admin_products_path) %>
+    </li>
+    <li class="classic-menu-dropdown" aria-haspopup="true">
+      <%= link_to("訂單", "javascript:void(0);") %>
+    </li>
+    <li class="classic-menu-dropdown" aria-haspopup="true">
+      <%= link_to("會員", "javascript:void(0);") %>
+    </li>
+    <li class="classic-menu-dropdown" aria-haspopup="true">
+      <%= link_to("首頁", "javascript:void(0);") %>
+    </li>
+    <li class="classic-menu-dropdown" aria-haspopup="true">
+      <%= link_to("訊息", "javascript:void(0);") %>
+    </li>
+  </ul>
+</div>

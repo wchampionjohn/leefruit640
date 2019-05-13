@@ -1,0 +1,45 @@
+<h4>
+  商品規格
+</h4>
+<hr />
+<div class="btn-group">
+    <%= link_to(new_admin_product_spec_path(product_id), class: 'btn blue') do %>
+    <i class="fa fa-plus"></i>
+    <% end %>
+</div>
+
+<br />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> 名稱 </th>
+      <th> 價格 </th>
+      <th> 圖片 </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% specs.each do |spec| %>
+    <tr>
+      <td>
+        <%= spec.title %>
+      </td>
+      <td>
+        <%= spec.price %>
+      </td>
+      <td>
+        <img src="<%= spec.image.url %>" width="60" height="60">
+      </td>
+      <td class="ui-helper-center">
+        <%= link_to(edit_admin_product_spec_path(product_id, spec.id), class: 'btn btn-default btn-xs') do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
+        <%= link_to(admin_product_spec_path(product_id, spec.id),  method: :delete, class: 'btn btn-default btn-xs', data: { "confirm-swal" =>  '確定刪除嗎 ?' }) do %>
+        <i class="fa fa-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
