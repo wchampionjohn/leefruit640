@@ -41,7 +41,7 @@ install_plugin Capistrano::SCM::Git
  require "capistrano/bundler"
  require "capistrano/rails"
  require "capistrano/puma"
- require 'capistrano/sidekiq'
+ #require 'capistrano/sidekiq'
 
 install_plugin Capistrano::Puma
 
