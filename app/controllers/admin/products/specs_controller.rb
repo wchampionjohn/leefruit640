@@ -1,5 +1,6 @@
 class Admin::Products::SpecsController < ResourcesController
 
+  before_action :authenticate_admin!
   layout "admin"
 
   before_action only: [:new, :edit, :update, :create] do

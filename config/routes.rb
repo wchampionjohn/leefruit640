@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, :controllers => {
+    sessions: "admin/sessions"
+  }
   devise_for(
     :users,
     controllers: {
@@ -37,7 +39,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    root 'index#index'
+    root 'products#index'
     devise_scope :admin do
       authenticated :admin do
         root 'products#index', as: :authenticated_root

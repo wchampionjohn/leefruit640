@@ -1,5 +1,7 @@
 class Admin::ProductsController < ResourcesController
 
+  before_action :authenticate_admin!
+
   layout "admin"
 
   def new
