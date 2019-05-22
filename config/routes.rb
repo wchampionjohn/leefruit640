@@ -51,6 +51,11 @@ Rails.application.routes.draw do
           resources :specs
         end
     end
+    resources :orders do
+      scope module: :orders do
+        resources :items
+      end
+    end
   end
 
   get 'about/index'

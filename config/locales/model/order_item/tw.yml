@@ -1,0 +1,9 @@
+zh-TW:
+  activerecord:
+    models:
+      order_item: '購買商品'
+    attributes:
+      order_item:
+        product: '名稱'
+        price: '小記'
+        quantity: '數量'

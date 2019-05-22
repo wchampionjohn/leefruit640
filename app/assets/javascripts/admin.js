@@ -19,6 +19,8 @@
 //= require toastr.min
 //= require dropzone
 //= require sweetalert.min
+//= require bootstrap-datepicker.min
+//= require bootstrap-datetimepicker.min
 //= require ./confirmbox
 //= require rails-ujs
 //

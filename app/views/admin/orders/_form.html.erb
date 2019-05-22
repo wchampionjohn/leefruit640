@@ -1,0 +1,71 @@
+<%= simple_form_for [:admin, current_object], html: { class: 'form-horizontal' } do |f| %>
+  <%= hidden_field(:order, :id, value: current_object.id) %>
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: admin_orders_path } %>
+<div class="form-body">
+  <h4 class="block">訂單資訊</h4>
+  <%= f.association :user, input_html: {class: 'form-control', class: 'input-large'} %>
+  <%= f.input :total_price, disabled: true, input_html: { class: 'input-large'} %>
+  <%= f.input :total_product, disabled: true, input_html: { class: 'input-large'} %>
+  <%= f.input :state, collection: Order.human_attribute_enum('state'), include_blank: false, label_method: :last, value_method: :first, input_html: { class: 'input-small' } %>
+  <div class="form-group">
+    <%= f.label :shipped_at, class: 'control-label col-md-2' %>
+    <div class="col-md-4">
+      <div class="input-group date form_datetime bs-datetime" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii">
+        <%= f.input_field :shipped_at, as: :string, class: 'form-control' %>
+        <span class="input-group-addon">
+          <button class="btn default date-reset" type="button">
+            <i class="fa fa-times"></i>
+          </button>
+        </span>
+        <span class="input-group-addon">
+          <button class="btn default date-set" type="button">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :delivered_at, class: 'control-label col-md-2' %>
+    <div class="col-md-4">
+      <div class="input-group date form_datetime bs-datetime" data-date="2019-06-01 00:00" data-date-format="dd MM yyyy - HH:ii">
+        <%= f.input_field :delivered_at, as: :string, class: 'form-control' %>
+        <span class="input-group-addon">
+          <button class="btn default date-reset" type="button">
+            <i class="fa fa-times"></i>
+          </button>
+        </span>
+        <span class="input-group-addon">
+          <button class="btn default date-set" type="button">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <h4 class="block">收件人資訊</h4>
+  <%= f.input :name, input_html: { class: 'input-large'} %>
+  <%= f.input :phone, input_html: { class: 'input-large'} %>
+  <%= f.association :city, input_html: { class: 'input-large'} %>
+  <%= f.association :area, input_html: { class: 'input-large'} %>
+  <%= f.input :address, input_html: { class: 'input-large'} %>
+  <%= f.input :note, input_html: { class: 'input-large'} %>
+
+
+  <hr />
+  <%= render partial: "items", locals: { order_id: current_object.id, items: current_object.order_items } unless current_object.new_record? %>
+</div>
+
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: admin_orders_path } %>
+
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $(".form_datetime").datetimepicker({
+    autoclose: true,
+    isRTL: App.isRTL(),
+    format: "yyyy-mm-dd hh:ii",
+    fontAwesome: true,
+    pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
+  });
+</script>

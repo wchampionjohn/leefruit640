@@ -1,0 +1,22 @@
+<div class="page-bar">
+  <%= breadcrumb(link_to('商品', admin_orders_path), '新增訂單') %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h2 class="page-header">
+        新增訂單
+      </h2>
+      <div class="portlet box blue">
+        <div class="portlet-title">
+          <div class="caption">
+            Append
+          </div>
+        </div>
+        <div class="portlet-body form">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

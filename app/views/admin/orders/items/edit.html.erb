@@ -1,0 +1,22 @@
+<div class="page-bar">
+  <%= breadcrumb(link_to('訂單', admin_products_path), link_to(@order.title, edit_admin_order_path(@order)), '編輯訂單商品') %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h2 class="page-header">
+        <%= @order.title %>
+      </h2>
+      <div class="portlet box blue">
+        <div class="portlet-title">
+          <div class="caption">
+            編輯訂單商品
+          </div>
+        </div>
+        <div class="portlet-body form">
+          <%= render partial: 'form', locals: { url: admin_order_item_path(@order.id, current_object) } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

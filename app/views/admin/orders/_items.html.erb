@@ -1,0 +1,44 @@
+<h4>
+  訂購商品
+</h4>
+<hr />
+<div class="btn-group">
+    <%= link_to(new_admin_order_item_path(order_id), class: 'btn blue') do %>
+    <i class="fa fa-plus"></i>
+    <% end %>
+</div>
+
+<br />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> 名稱 </th>
+      <th> 單價 </th>
+      <th> 數量 </th>
+      <th> 小記 </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% items.each do |item| %>
+    <tr>
+      <td class="column-2"><%= item.product.full_title %></td>
+      <td class="column-3"><%= item.product.price %></td>
+      <td>
+        <%= item.product.price %>
+      </td>
+      <td>
+        <%= item.price %>
+      </td>
+      <td class="ui-helper-center">
+        <%= link_to(edit_admin_order_item_path(order_id, item.id), class: 'btn btn-default btn-xs') do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
+        <%= link_to(admin_order_item_path(order_id, item.id),  method: :delete, class: 'btn btn-default btn-xs', data: { "confirm-swal" =>  '確定刪除嗎 ?' }) do %>
+        <i class="fa fa-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

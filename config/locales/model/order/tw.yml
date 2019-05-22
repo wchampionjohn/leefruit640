@@ -1,0 +1,24 @@
+zh-TW:
+  activerecord:
+    models:
+      order: '訂單'
+    attributes:
+      order:
+        user: '會員'
+        state: '狀態'
+        total_product: '商品總數'
+        total_price: '總金額'
+        delivered_at: '到貨日期'
+        shipped_at: '出貨日期'
+        name: '姓名'
+        phone: '聯絡電話'
+        city: '縣市'
+        area: '鄉鎮區'
+        address: '巷弄/街道'
+        note: '備註'
+      order/state:
+        pending: '待處理'
+        confirmed: '已付款'
+        shipping: '出貨中'
+        delivered: '已到貨'
+        refunded: '已取消'
