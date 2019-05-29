@@ -1,0 +1,22 @@
+<div class="table-scrollable">
+  <table class="table table-hover">
+    <tr>
+      <th>姓名</th>
+      <th>訊息</th>
+      <th>建立時間</th>
+    </tr>
+    <% current_collection.each do |contract| %>
+    <tr>
+      <td>
+        <%= contract.name %>
+      </td>
+      <td>
+        <%= contract.message %>
+      </td>
+      <td>
+        <%= contract.created_at("%F %T") %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

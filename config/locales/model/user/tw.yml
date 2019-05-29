@@ -1,0 +1,11 @@
+zh-TW:
+  activerecord:
+    models:
+      user: '會員'
+    attributes:
+      user:
+        name: '姓名'
+        phone: '聯絡電話'
+        city: '縣市'
+        area: '鄉鎮區'
+        address: '巷弄/街道'

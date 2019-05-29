@@ -1,0 +1,16 @@
+<%= simple_form_for [:admin, current_object], html: { class: 'form-horizontal' } do |f| %>
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: admin_users_path } %>
+<div class="form-body">
+  <%= f.input :name, input_html: { class: 'input-large'} %>
+  <%= f.input :email, input_html: { class: 'input-large'} %>
+  <%= f.input :password, input_html: { class: 'input-large'} %>
+  <%= f.input :password_confirmation, input_html: { class: 'input-large'} %>
+  <%= f.input :phone, input_html: { class: 'input-large'} %>
+  <%= f.association :city, input_html: { class: 'input-large'} %>
+  <%= f.association :area, input_html: { class: 'input-large'} %>
+  <%= f.input :address, input_html: { class: 'input-large'} %>
+</div>
+
+<%= render partial: 'shared/save', locals: { f: f, cancel_path: admin_users_path } %>
+
+<% end %>

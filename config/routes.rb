@@ -56,6 +56,9 @@ Rails.application.routes.draw do
         resources :items
       end
     end
+
+    resources :users
+    resources :contracts
   end
 
   get 'about/index'

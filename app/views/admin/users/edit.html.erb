@@ -1,0 +1,22 @@
+<div class="page-bar">
+  <%= breadcrumb(link_to('會員', admin_users_path), current_object.name) %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">
+        修改會員
+      </h2>
+      <div class="portlet box blue">
+        <div class="portlet-title">
+          <div class="caption">
+            <%= current_object.name %>
+          </div>
+        </div>
+        <div class="portlet-body form">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

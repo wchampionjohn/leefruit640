@@ -1,0 +1,35 @@
+<div class="table-scrollable">
+  <table class="table table-hover">
+    <tr>
+      <th>姓名</th>
+      <th>email</th>
+      <th>電話</th>
+      <th>地址</th>
+      <th style="text-align:center">操作</th>
+    </tr>
+    <% current_collection.each do |user| %>
+    <tr>
+      <td>
+        <%= user.name %>
+      </td>
+      <td>
+        <%= user.email %>
+      </td>
+      <td>
+        <%= user.phone %>
+      </td>
+      <td>
+        <%= user.full_address %>
+      </td>
+      <td class="ui-helper-center">
+        <%= link_to(edit_admin_user_path(user), class: 'btn btn-default btn-xs') do %>
+        <i class="fa fa-pencil"></i>
+        <% end %>
+        <%= link_to(admin_user_path(user),  method: :delete, class: 'btn btn-default btn-xs', data: { "confirm-swal" =>  '確定刪除嗎 ?' }) do %>
+        <i class="fa fa-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

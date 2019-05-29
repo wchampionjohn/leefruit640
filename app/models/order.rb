@@ -20,6 +20,8 @@ class Order < ApplicationRecord
 
   enum state: [:pending, :confirmed, :shipping, :delivered, :refunded]
 
+  DEFAULT_VALUES = { state: :pending }
+
 
   def title
     "#{user.name} - #{created_at.strftime("%F")}"
