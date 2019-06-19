@@ -6,11 +6,15 @@ class User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   before_action only: [:edit] do
-    @area_options = Area.where(city_id: current_user.city_id)
+    @area_options = if current_user.city_id
+                        Area.where(city_id: current_user.city_id)
+                      else
+                        {}
+                      end
   end
 
   before_action only: [:new] do
-    @area_options = Area.where(city_id: City.first.id)
+    @area_options = {}
   end
 
   before_action only: [:update] do
@@ -48,13 +52,13 @@ class User::RegistrationsController < Devise::RegistrationsController
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
     @user = User.find(current_user.id)
 
+      account_update_params.delete("current_password")
     # required for settings form to submit when password is left blank
     if @user.login_social?
       account_update_params.delete("password")
       account_update_params.delete("password_confirmation")
-      account_update_params.delete("current_password")
 
-      if @user.update_attributes(account_update_params)
+      if @user.update_without_password(account_update_params)
         set_flash_message :notice, :updated
         # Sign in the user bypassing validation in case their password changed
         sign_in @user, :bypass => true
@@ -67,6 +71,10 @@ class User::RegistrationsController < Devise::RegistrationsController
     end
 
   end
+
+ def update_resource(resource, params)
+   resource.update_without_password(params)
+ end
 
   # DELETE /resource
   # def destroy

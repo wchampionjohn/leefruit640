@@ -24,6 +24,13 @@
 							<th class="column-3"></th>
 						</tr>
 
+            <% if @orders.size == 0 %>
+            <tr class="table-row">
+              <td class="column-1" colspan="6">
+                目前沒有任何訂單
+              </td>
+            </tr>
+            <% end %>
             <% @orders.each do |order| %>
 						<tr class="table-row">
 							<td class="column-1">

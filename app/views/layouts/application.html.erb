@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="shortcut icon" href="<%= asset_path('icons/favicon.ico') %>" />
   </head>
 
   <body>
@@ -119,9 +120,15 @@
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
-        <%= image_tag 'icons/icon-header-01.png', class: 'header-icon1', alt: "IMG-LOGO" %>
-					</a>
+          <%= link_to(edit_user_registration_path, class: 'header-wrapicon1 dis-block') do %>
+          <%= image_tag 'icons/icon-header-01.png', class: 'header-icon1', alt: "IMG-LOGO" %>
+          <% end %>
+
+					<span class="linedivide2"></span>
+
+          <%= link_to(orders_path, class: 'header-wrapicon1 dis-block') do %>
+          <%= image_tag 'icons/icon-header-03.png', class: 'header-icon1', alt: "IMG-LOGO" %>
+          <% end %>
 
 					<span class="linedivide2"></span>
 

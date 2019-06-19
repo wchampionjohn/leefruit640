@@ -32,13 +32,13 @@
         </div>
 
         <div class="bo4 of-hidden size15 m-b-20 rs2-select2">
-          <%= f.collection_select(:city_id, City.all, :id, :name, {},{
+          <%= f.collection_select(:city_id, City.all, :id, :name, {include_blank: '請選擇縣市' },{
           placeholder: "縣市",
           class: "selection-2 select2-hidden-accessible"}) %>
         </div>
 
         <div class="bo4 of-hidden size15 m-b-20 rs2-select2">
-          <%= f.collection_select(:area_id, @area_options, :id, :name, {},{
+          <%= f.collection_select(:area_id, @area_options, :id, :name, {include_blank: '請先選擇縣市' },{
           placeholder: "鄉鎮區",
           class: "selection-2 select2-hidden-accessible"}) %>
         </div>

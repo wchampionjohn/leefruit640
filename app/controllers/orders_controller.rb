@@ -28,12 +28,16 @@ class OrdersController < ApplicationController
       )
     end
 
-    if order.save!
+    if order.save
       clear_cart
       flash[:notice] = "訂單送出成功！"
       redirect_to orders_path
     else
-      render 'carts/checkout'
+      @user = current_user
+      @order = order
+      @area_options = Area.where(city_id: order.city_id)
+      flash[:alert] = order.errors.full_messages.join("\r\n")
+      render 'orders/new'
     end
 
   end
