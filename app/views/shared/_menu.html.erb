@@ -18,7 +18,7 @@
         <%= link_to("訂購流程", note_index_path) %>
       </li>
       <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == articles_path %> >
-        <%= link_to("部落格", articles_path) %>
+        <%= link_to("部落格", 'http://leefruit640.blogspot.tw/', target: "_blank") %>
       </li>
       <li <%= 'class=sale-noti' if request.env['PATH_INFO'] == new_contract_path %> >
         <%= link_to("聯絡我們", new_contract_path) %>

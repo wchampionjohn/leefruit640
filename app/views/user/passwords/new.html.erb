@@ -1,16 +1,30 @@
-<h2>Forgot your password?</h2>
+<section class="bgwhite p-t-66 p-b-60">
+<h4 class="m-text26 p-b-36 p-t-15" align="center">
+  忘記密碼
+</h4>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 p-b-30">
+      </div>
+      <div class="col-md-4 p-b-30">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "leave-comment" }) do |f| %>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <%= f.text_field :email,
+          required: false, autofocus: true, placeholder: :請輸入您的email,
+          class: "sizefull s-text7 p-l-22 p-r-22" %>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="of-hidden size15 m-b-20">
+          <!-- Button -->
+          <%= f.submit "送出", class: "flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" %>
+        </div>
+        <% end %>
+        <div class="of-hidden size15 m-b-20">
+          <%= link_to("回上一頁", new_user_session_path, class: 'flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4') %>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "user/users/shared/links" %>

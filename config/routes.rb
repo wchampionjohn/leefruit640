@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     :users,
     controllers: {
       sessions: "user/sessions",
+      passwords: "user/passwords",
       registrations: "user/registrations",
       omniauth_callbacks: "user/omniauth_callbacks"
     }

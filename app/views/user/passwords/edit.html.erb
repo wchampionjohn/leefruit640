@@ -1,25 +1,36 @@
-<h2>Change your password</h2>
+<section class="bgwhite p-t-66 p-b-60">
+<h4 class="m-text26 p-b-36 p-t-15" align="center">
+  重新設定密碼
+</h4>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 p-b-30">
+      </div>
+      <div class="col-md-4 p-b-30">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "leave-comment" }) do |f| %>
+        <%= f.hidden_field :reset_password_token %>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <%= f.password_field :password,
+          required: false, placeholder: :新密碼,
+          class: "sizefull s-text7 p-l-22 p-r-22" %>
+        </div>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <%= f.password_field :password_confirmation,
+          required: false, placeholder: :再次輸入密碼,
+          class: "sizefull s-text7 p-l-22 p-r-22" %>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+        <div class="of-hidden size15 m-b-20">
+          <!-- Button -->
+          <%= f.submit "送出", class: "flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" %>
+        </div>
+        <% end %>
+        <div class="of-hidden size15 m-b-20">
+          <%= link_to("回首頁", root_path, class: 'flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4') %>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "user/users/shared/links" %>

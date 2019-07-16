@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-server "34.230.80.14", user: "deploy", roles: [:web, :app, :db], primary: true
+server "34.239.110.170", user: "deploy", roles: [:web, :app, :db], primary: true
 set :application, "leefruit640"
 set :repo_url, "git@github.com:wchampionjohn/leefruit640.git"
 
