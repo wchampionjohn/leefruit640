@@ -6,11 +6,11 @@ class Admin::ProductsController < ResourcesController
 
   def new
     current_object.save(validate: false)
-    redirect_to edit_admin_product_path(current_object.id)
+    redirect_to edit_admin_product_path(Product.last.id)
   end
 
   def collection_scope
-    ::Product.all
+    ::Product.where(is_finish: true)
   end
 
   def object_params
