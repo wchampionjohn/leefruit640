@@ -44,7 +44,7 @@
   </div>
 
   <hr />
-  <%= render partial: "specs", locals: { product_id: current_object.id, specs: current_object.specs } %>
+  <%= render partial: "specs", locals: { product_id: current_object.id, specs: current_object.specs.order(:seq) } %>
 
 </div>
 

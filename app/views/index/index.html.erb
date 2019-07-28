@@ -1,5 +1,5 @@
 	<!-- Slide1 -->
-	<section class="slide1">
+	<section class="slide1" style="margin:0px 10px 0px 10px">
 		<div class="wrap-slick1">
 			<div class="slick1">
 			  <% @indexes.each do |index| %>
@@ -102,27 +102,22 @@
 	<!-- Banner2 -->
 	<section class="banner2 bg5 p-t-55 p-b-55">
     <h3 class="m-text5 t-center">
-      <%= link_to("立刻購買", product_path(1)) %>
+      帝王柑
     </h3>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="hov-img-zoom pos-relative">
             <%= image_tag 'banner-08.jpg', alt: "IMG-BANNER" %>
+            <div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+              <%= link_to(product_path(1), class: "l-text1 fs-35-sm") do %>
+              立即購買
+              <% end %>
 
-						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
-							<span class="m-text9 p-t-45 fs-20-sm">
-								帝王柑
-							</span>
-
-							<h3 class="l-text1 fs-35-sm">
-								帝王柑
-							</h3>
-
-							<a href="#" class="s-text4 hov2 p-t-20 ">
-								加入購物車
-							</a>
-						</div>
+              <a href="#" class="s-text4 hov2 p-t-20 ">
+                加入購物車
+              </a>
+            </div>
 					</div>
 				</div>
 

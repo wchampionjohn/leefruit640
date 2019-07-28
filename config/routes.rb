@@ -49,7 +49,11 @@ Rails.application.routes.draw do
     resources :products do
         scope module: :products do
           resources :images, only: [:index, :create, :destroy]
-          resources :specs
+          resources :specs do
+            member do
+              get :switch_seq, path: 'switch/:target_id'
+            end
+          end
         end
     end
     resources :orders do

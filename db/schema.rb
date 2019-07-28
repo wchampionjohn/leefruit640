@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190522133843) do
+ActiveRecord::Schema.define(version: 20190728061407) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(version: 20190522133843) do
     t.integer "state", limit: 2
     t.datetime "delivered_at"
     t.datetime "shipped_at"
+    t.integer "delivery_way", limit: 2
+    t.index ["delivery_way"], name: "index_orders_on_delivery_way"
   end
 
   create_table "product_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -134,6 +136,8 @@ ActiveRecord::Schema.define(version: 20190522133843) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "seq"
+    t.index ["seq"], name: "index_product_specs_on_seq"
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

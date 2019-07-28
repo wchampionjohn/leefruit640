@@ -19,6 +19,7 @@ class Order < ApplicationRecord
     length: { minimum: 0, maximum: 2000 }
 
   enum state: [:pending, :confirmed, :shipping, :delivered, :refunded]
+  enum delivery_way: [:atm, :personally, :line_pay, :cash]
 
   DEFAULT_VALUES = { state: :pending }
 

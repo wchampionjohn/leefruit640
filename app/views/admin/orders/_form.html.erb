@@ -10,7 +10,7 @@
   <div class="form-group">
     <%= f.label :shipped_at, class: 'control-label col-md-2' %>
     <div class="col-md-4">
-      <div class="input-group date form_datetime bs-datetime" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii">
+      <div class="input-group date form_datetime bs-datetime" data-date-format="dd MM yyyy - HH:ii">
         <%= f.input_field :shipped_at, as: :string, class: 'form-control' %>
         <span class="input-group-addon">
           <button class="btn default date-reset" type="button">
@@ -28,7 +28,7 @@
   <div class="form-group">
     <%= f.label :delivered_at, class: 'control-label col-md-2' %>
     <div class="col-md-4">
-      <div class="input-group date form_datetime bs-datetime" data-date="2019-06-01 00:00" data-date-format="dd MM yyyy - HH:ii">
+      <div class="input-group date form_datetime bs-datetime" data-date-format="dd MM yyyy - HH:ii">
         <%= f.input_field :delivered_at, as: :string, class: 'form-control' %>
         <span class="input-group-addon">
           <button class="btn default date-reset" type="button">
@@ -49,6 +49,8 @@
   <%= f.association :city, input_html: { class: 'input-large'} %>
   <%= f.association :area, input_html: { class: 'input-large'} %>
   <%= f.input :address, input_html: { class: 'input-large'} %>
+<%= f.input :delivery_way, input_html: { class: 'input-large'},
+  collection: Order.human_attribute_enum('delivery_way'), label_method: :last, value_method: :first, include_blank: false %>
   <%= f.input :note, input_html: { class: 'input-large'} %>
 
 

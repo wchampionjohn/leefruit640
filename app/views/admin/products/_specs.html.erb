@@ -12,6 +12,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th width="7%"> 順序 </th>
       <th> 名稱 </th>
       <th> 價格 </th>
       <th> 圖片 </th>
@@ -19,8 +20,20 @@
     </tr>
   </thead>
   <tbody>
-    <% specs.each do |spec| %>
+    <% specs.each_with_index do |spec, index| %>
     <tr>
+      <td>
+        <% if spec != specs.first %>
+        <%= link_to(switch_seq_admin_product_spec_path(spec.product_id, spec.id, specs[index-1][:id]), class: '') do %>
+        <i class="fa fa-angle-up"></i>
+        <% end %>
+        <% end %>
+        <% if spec != specs.last %>
+        <%= link_to(switch_seq_admin_product_spec_path(spec.product_id, spec.id, specs[index+1][:id]), class: '') do %>
+          <i class="fa fa-angle-down"></i>
+          <% end %>
+        <% end %>
+      </td>
       <td>
         <%= spec.title %>
       </td>

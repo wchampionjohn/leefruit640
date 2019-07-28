@@ -15,6 +15,7 @@ zh-TW:
         city: '縣市'
         area: '鄉鎮區'
         address: '巷弄/街道'
+        delivery_way: '付款方式'
         note: '備註'
       order/state:
         pending: '待處理'
@@ -22,3 +23,8 @@ zh-TW:
         shipping: '出貨中'
         delivered: '已到貨'
         refunded: '已取消'
+      order/delivery_way:
+        atm: 'ATM轉帳'
+        line_pay: 'Line Pay'
+        cash: '貨到付款'
+        personally: '到店取貨'

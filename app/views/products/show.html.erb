@@ -33,19 +33,22 @@
 				<div class="p-t-33 p-b-60">
 					<div class="flex-m flex-w p-b-10">
 						<div class="s-text15 w-size15 t-center">
-							Size
+							規格
 						</div>
 
 						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
 							<select id="product-select" class="selection-2" name="size">
-							  <% @product.specs.each do |spec| %>
+							  <% @product.specs.order(:seq).each do |spec| %>
                 <option value="<%= spec.id %>" data-price="<%= spec.price %>"><%= spec.title %></option>
 							  <% end %>
 							</select>
 						</div>
 					</div>
 					<div class="flex-r-m flex-w p-t-10">
-						<div class="w-size16 flex-m flex-w">
+            <div class="s-text15 w-size15 t-center">
+              數量
+            </div>
+						<div class="w-size16 flex-m flex-w ">
 							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
 								<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
 									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
@@ -58,14 +61,25 @@
 								</button>
 							</div>
 
-							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+						</div>
+					</div>
+
+					<div class="flex-r-m flex-w p-t-10">
+						<div class="w-size16 flex-m flex-w">
+							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10 m-r-10">
 								<!-- Button -->
 								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" onClick="addItem()">
 									加入購物車
 								</button>
 							</div>
-						</div>
-					</div>
+							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+								<!-- Button -->
+								<button class="flex-c-m sizefull bg10 bo-rad-23 hov1 s-text1 trans-0-4" onClick="checkout()">
+									立即購買
+								</button>
+							</div>
+          </div>
+          </div>
 				</div>
 
 
@@ -114,10 +128,30 @@
     .done(function( data ) {
       var nameProduct = $('.product-detail-name').html();
       swal(nameProduct, "成功加入購物車", "success");
-      setTimeout(location.reload.bind(location), 2000);
+    setTimeout(location.reload.bind(location), 2000);
     })
     .fail(function(xhr, status, error) {
       swal(nameProduct, "加入購物車失敗", "error");
     })
   }
+
+  function checkout()
+  {
+    var id = $("#product-select option:selected").val();
+
+    var quantity = $("input[name='num-product']").val();
+    url = "/cart/add/" + id + "/" + quantity
+
+    $.ajax({
+      url: url,
+      type: "post"
+    })
+    .done(function( data ) {
+      document.location = "/orders/new";
+    })
+    .fail(function(xhr, status, error) {
+      swal(nameProduct, "結帳失敗", "error");
+    })
+  }
+
 </script>
