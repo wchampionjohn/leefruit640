@@ -10,7 +10,7 @@ class Admin::OrdersController < ResourcesController
   def object_params
     params.require(:order)
       .permit(
-        :user, :state, :delivered_at, :shipped_at,
+        :user, :state, :delivered_at, :shipped_at, :delivery_way,
         :name, :city, :area, :address, :phone, :note,
       )
   end

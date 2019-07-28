@@ -31,5 +31,9 @@ class ApplicationRecord < ActiveRecord::Base
     where(columns, *values)
   end
 
+  def self.human_enum_name(enum_name, enum_value)
+    I18n.t("activerecord.attributes.#{model_name.i18n_key}/#{enum_name.to_s}.#{enum_value}")
+  end
+
 
 end
