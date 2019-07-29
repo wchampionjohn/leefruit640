@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
   before_action :initialize_cart
   before_action :authenticate_user!
+  before_action only: [:new, :create] do
+    @delivery_way_options = Order.delivery_ways.map do |way, key|
+      [Order.human_attribute_name("delivery_way.#{way}"), key]
+    end
+  end
 
   def show
     @order = Order.find(params[:id])
@@ -15,9 +20,6 @@ class OrdersController < ApplicationController
     @order = Order.new
     city_id = City.first.id
     @area_options = Area.where(city_id: city_id)
-    @delivery_way_options = Order.delivery_ways.map do |way, key|
-      [Order.human_attribute_name("delivery_way.#{way}"), key]
-    end
   end
 
   def create
