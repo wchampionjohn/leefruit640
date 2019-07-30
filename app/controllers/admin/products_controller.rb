@@ -5,18 +5,18 @@ class Admin::ProductsController < ResourcesController
   layout "admin"
 
   def new
-    current_object.save(validate: false)
+    Product.new.save(validate: false)
     redirect_to edit_admin_product_path(Product.last.id)
   end
 
-  def collection_scope
+  def current_collection
     ::Product.where(is_finish: true)
   end
 
-  def object_params
-    params.require(:product)
-      .permit(
-    :name, :price, :description, :description_2, :is_public,
-    )
+  def permitted_attributes
+    [
+      :name, :price, :description,
+      :description_2, :is_public,
+    ]
   end
 end

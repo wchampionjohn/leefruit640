@@ -7,15 +7,14 @@ class Admin::Products::SpecsController < ResourcesController
     @product = ::Product.find params[:product_id]
   end
 
-  def collection_scope
+  def current_collection
     ::Product::Spec.all.order(:product_id, :seq)
   end
 
-  def object_params
-    params.require(:product_spec)
-      .permit(
-    :title, :price, :product_id, :image, :seq
-    )
+  def permitted_attributes
+    [
+      :title, :price, :product_id, :image, :seq
+    ]
   end
 
   def switch_seq
@@ -30,8 +29,16 @@ class Admin::Products::SpecsController < ResourcesController
     redirect_to edit_admin_product_path(params[:product_id])
   end
 
-  def url_after_create
-    edit_admin_product_spec_path(@product.id, collection_scope.last.id)
+  def action_after_create
+    edit_admin_product_spec_path(@product.id, current_collection.last.id)
+  end
+
+  def param_key
+    "product_spec"
+  end
+
+  def model_class_name
+    "Product::Spec"
   end
 
 end

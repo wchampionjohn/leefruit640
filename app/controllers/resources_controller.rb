@@ -1,92 +1,76 @@
-# reference https://github.com/jodeci/shikigami
 class ResourcesController < ApplicationController
-  helper_method :current_collection, :current_object
-
+  helper_method :model_class, :model_class_name, :current_collection, :current_object
   def index
   end
 
   def new
-    @current_object = collection_scope.new
+    @current_object = default_scope.new
   end
 
   def create
-    @current_object = collection_scope.create(object_params)
-    respond_to do |f|
-      f.html do
-        if @current_object.valid?
-          flash[:success] = '新增成功'
-          redirect_to url_after_create
-        else
-          flash[:alert] = '新增失敗'
-          render :new
-        end
-      end
-      f.json
+    if @current_object = default_scope.create(object_params)
+      flash[:success] = '新增成功'
+      redirect_to action_after_create
+    else
+      render action: :new
+    end
+  end
+
+  def update
+    if current_object.update(object_params)
+      flash[:success] = '更新成功'
+      redirect_to action_after_update
+    else
+      render action: :edit
     end
   end
 
   def destroy
     current_object.destroy
-    respond_to do |f|
-      f.html do
-        flash[:success] = '刪除成功'
-        redirect_to url_after_destroy
-      end
-      f.json do
-        head :no_content
-      end
-    end
+    redirect_to action_after_destroy
   end
 
-  def edit
+protected
+
+  def model_class_name #may need to re-define in your controller
+    self.class.to_s.demodulize.gsub('Controller', '').singularize
   end
 
-  def update
-    if current_object.update(object_params)
-      respond_to do |f|
-        f.html do
-          flash[:success] = '更新成功'
-          redirect_to url_after_update
-        end
-        f.json
-      end
-    else
-      respond_to do |f|
-        f.html do |f|
-          flash[:alert] = '更新失敗'
-          render action: :edit
-        end
-        f.json
-      end
-    end
+  def model_class #may need to re-define in your controller
+    model_class_name.constantize
   end
 
-  private
-
-  def url_after_create
-    request.env['HTTP_REFERER'] || url_for(action: :index)
+  def permitted_attributes
+    #must re-define in your controller
   end
 
-  alias url_after_update url_after_create
-  alias url_after_destroy url_after_create
-
-  def collection_scope
-    # You should implement it in your controller
+  def param_key
+    model_class_name.underscore.to_sym
   end
 
-  def object_params
-    # You should implement it in your controller
+  def default_scope
+    model_class
   end
 
   def current_collection
-    @collection ||= collection_scope.page(params[:page])
+    @current_collection ||= default_scope.page(params[:page])
   end
 
   def current_object
-    if params[:id]
-      collection_scope.find(params[:id])
-    else
-      collection_scope.new
-    end
+    @current_object ||= default_scope.find(params[:id])
   end
+
+  def object_params
+    params.require(param_key).permit(*permitted_attributes)
+  end
+
+  def action_after_create
+    url_for action: :index
+  end
+
+  def action_after_update
+    request.referrer || url_for(action: :index)
+  end
+  alias :action_after_destroy :action_after_update
+
 end

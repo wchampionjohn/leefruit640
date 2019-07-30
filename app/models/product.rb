@@ -5,11 +5,8 @@ class Product < ApplicationRecord
 
   validates_presence_of :name, :price, :description, :description_2
 
-  before_validation do
-    is_finish || true
+  before_update do
+    self.is_finish ||= true
   end
 
-  DEFAULT_VALUE = {
-    is_finish: false
-  }
 end

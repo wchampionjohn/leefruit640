@@ -3,15 +3,18 @@ class Admin::OrdersController < ResourcesController
 
   layout "admin"
 
-  def collection_scope
+  def current_collection
     ::Order.all
   end
 
-  def object_params
-    params.require(:order)
-      .permit(
-        :user, :state, :delivered_at, :shipped_at, :delivery_way,
-        :name, :city, :area, :address, :phone, :note,
-      )
+  def permitted_attributes
+    [
+      :user, :state, :delivered_at, :shipped_at, :delivery_way,
+      :name, :city, :area, :address, :phone, :note
+    ]
+  end
+
+  def model_class_name
+    'Order'
   end
 end

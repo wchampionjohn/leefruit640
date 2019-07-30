@@ -6,19 +6,16 @@ class Admin::Orders::ItemsController < ResourcesController
     @order = ::Order.find params[:order_id]
   end
 
-  def collection_scope
+  def current_collection
     ::OrderItem.all.where(order_id: params[:order_id])
   end
 
-  def object_params
-    params.require(:order_item)
-      .permit(
-        :product_id, :quantity, :order_id
-      )
+  def permitted_attributes
+    [ :product_id, :quantity, :order_id]
   end
 
   def url_after_create
-    edit_admin_order_item_path(@order.id, collection_scope.last.id)
+    edit_admin_order_item_path(@order.id, current_collection.last.id)
   end
 
 end

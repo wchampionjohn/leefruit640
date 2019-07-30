@@ -3,7 +3,7 @@ class Admin::ContractsController < ResourcesController
 
   layout "admin"
 
-  def collection_scope
+  def current_collection
     ::Contract.all
   end
 

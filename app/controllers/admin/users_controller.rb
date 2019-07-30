@@ -3,15 +3,14 @@ class Admin::UsersController < ResourcesController
 
   layout "admin"
 
-  def collection_scope
+  def current_collection
     ::User.all
   end
 
-  def object_params
-    params.require(:user)
-      .permit(
-        :name, :email, :phone,
-        :name, :city, :area, :address
-      )
+  def permitted_attributes
+    [
+      :name, :email, :phone,
+      :name, :city, :area, :address
+    ]
   end
 end
